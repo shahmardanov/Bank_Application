@@ -1,5 +1,5 @@
 package com.example.bankapplication.model.enums;
 
 public enum Currency {
-    AZN, USD, EUR,GEL, RUB
+    AZN, USD, EUR, GEL, RUB
 }
