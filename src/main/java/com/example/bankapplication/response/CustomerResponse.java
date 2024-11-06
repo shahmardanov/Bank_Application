@@ -1,5 +1,6 @@
 package com.example.bankapplication.response;
 
+import com.example.bankapplication.model.enums.City;
 import lombok.*;
 
 @Getter
@@ -8,4 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class CustomerResponse {
+    private String customerName;
+    private City city;
+    private String address;
 }
