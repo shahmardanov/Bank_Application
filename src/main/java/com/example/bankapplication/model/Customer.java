@@ -18,7 +18,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String customerName;
-    private String accountNumber = UUID.randomUUID().toString();
+    private String customerEmail;
     private Long dateOfBirth;
 
     @Enumerated(EnumType.STRING)

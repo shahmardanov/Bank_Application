@@ -10,7 +10,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CustomerNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleCustomerNotFoundException(CustomerNotFoundException ex) {
-        return new ErrorResponse("Customer Not Found", ex.getMessage());
+        return new ErrorResponse("Customer Not Found");
+    }
+
+    @ExceptionHandler(CustomerNotFoundException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleCustomerCustomerAlreadyExist(CustomerAlreadyExist ex) {
+        return new ErrorResponse("Customer By This Email Address already exists!");
     }
 }
 

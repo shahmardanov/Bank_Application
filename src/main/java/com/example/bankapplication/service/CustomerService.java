@@ -1,5 +1,6 @@
 package com.example.bankapplication.service;
 
+import com.example.bankapplication.exception.CustomerAlreadyExist;
 import com.example.bankapplication.exception.CustomerNotFoundException;
 import com.example.bankapplication.mapping.CustomerMapping;
 import com.example.bankapplication.model.Customer;
@@ -17,8 +18,8 @@ public class CustomerService {
     private final CustomerMapping customerMapping;
 
     public CustomerResponse createCustomer(CustomerRequest customerRequest) {
-        if (customerRepository.findCustomerByAccountNumber(customerRequest.getAccountNumber()).isPresent()) {
-            throw new CustomerNotFoundException("Customer not found");
+        if (customerRepository.findCustomerByCustomerEmail(customerRequest.getCustomerEmail()).isPresent()) {
+            throw new CustomerAlreadyExist("Customer not found");
         }
         Customer customer = customerMapping.requestToEntity(customerRequest);
         customerRepository.save(customer);
