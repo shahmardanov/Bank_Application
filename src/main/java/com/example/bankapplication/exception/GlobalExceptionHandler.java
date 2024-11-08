@@ -10,7 +10,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CustomerNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleCustomerNotFoundException(CustomerNotFoundException ex) {
-        return new ErrorResponse("Customer Not Found");
+        return new ErrorResponse("Customer Not Found!");
     }
 
     @ExceptionHandler(CustomerAlreadyExist.class)

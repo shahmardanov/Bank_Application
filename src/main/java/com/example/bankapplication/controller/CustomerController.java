@@ -1,5 +1,6 @@
 package com.example.bankapplication.controller;
 
+import com.example.bankapplication.model.Customer;
 import com.example.bankapplication.request.CustomerRequest;
 import com.example.bankapplication.response.CustomerResponse;
 import com.example.bankapplication.service.CustomerService;
@@ -30,5 +31,10 @@ public class CustomerController {
     @GetMapping("/getById/{id}")
     public ResponseEntity<Optional<CustomerResponse>> getCustomerByID(@PathVariable(name = "id") Long customerId) {
         return ResponseEntity.ok(customerService.getCustomerById(customerId));
+    }
+
+    @GetMapping("/getByEmail/{customerEmail}")
+    public ResponseEntity<Optional<CustomerResponse>> getCustomerByEmail(@PathVariable(name = "customerEmail") String email){
+        return ResponseEntity.ok(customerService.getCustomerByEmail(email));
     }
 }

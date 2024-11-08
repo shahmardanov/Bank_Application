@@ -10,6 +10,7 @@ import lombok.*;
 @Builder
 public class CustomerResponse {
     private String customerName;
+    private String customerEmail;
     private City city;
     private String address;
 }

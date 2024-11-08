@@ -1,6 +1,7 @@
 package com.example.bankapplication.service;
 
 import com.example.bankapplication.exception.CustomerAlreadyExist;
+import com.example.bankapplication.exception.CustomerNotFoundException;
 import com.example.bankapplication.mapping.CustomerMapping;
 import com.example.bankapplication.model.Customer;
 import com.example.bankapplication.repository.CustomerRepository;
@@ -22,7 +23,7 @@ public class CustomerService {
 
     public CustomerResponse createCustomer(CustomerRequest customerRequest) {
         if (customerRepository.findCustomerByCustomerEmail(customerRequest.getCustomerEmail()).isPresent()) {
-            throw new CustomerAlreadyExist("Customer not found");
+            throw new CustomerAlreadyExist("Customer not found!");
         }
         Customer customer = customerMapping.requestToEntity(customerRequest);
         customerRepository.save(customer);
@@ -35,6 +36,16 @@ public class CustomerService {
     }
 
     public Optional<CustomerResponse> getCustomerById (Long customerId){
-        return customerRepository.findById(customerId).map(customerMapping::toLong);
+        return Optional.ofNullable(customerRepository.findById(customerId).map(customerMapping::toLong).orElseThrow(
+                () -> new CustomerNotFoundException("Customer not found!")));
     }
+
+    public Optional<CustomerResponse> getCustomerByEmail(String customerEmail) {
+        Customer customer = customerRepository.findCustomerByCustomerEmail(customerEmail)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer not Found!"));
+        CustomerResponse customerResponse = customerMapping.createToResponse(customer);
+
+        return Optional.ofNullable(customerResponse);
+    }
+
 }
