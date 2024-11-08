@@ -6,13 +6,10 @@ import com.example.bankapplication.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/customer")
@@ -26,7 +23,12 @@ public class CustomerController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<CustomerResponse>> getAllCustomers(){
+    public ResponseEntity<List<CustomerResponse>> getAllCustomers() {
         return ResponseEntity.ok(customerService.getAllCustomers());
+    }
+
+    @GetMapping
+    public ResponseEntity<Optional<CustomerResponse>> getCustomerByID(@PathVariable Long customerId) {
+        return ResponseEntity.ok(customerService.getCustomerById(customerId));
     }
 }
