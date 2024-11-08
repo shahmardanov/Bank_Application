@@ -34,7 +34,12 @@ public class CustomerController {
     }
 
     @GetMapping("/getByEmail/{customerEmail}")
-    public ResponseEntity<Optional<CustomerResponse>> getCustomerByEmail(@PathVariable(name = "customerEmail") String email){
+    public ResponseEntity<Optional<CustomerResponse>> getCustomerByEmail(@PathVariable(name = "customerEmail") String email) {
         return ResponseEntity.ok(customerService.getCustomerByEmail(email));
+    }
+
+    @DeleteMapping("/delete/{customerId}")
+    public void deleteCustomerById(@PathVariable(name = "customerId") Long id) {
+        customerService.deleteCustomerById(id);
     }
 }

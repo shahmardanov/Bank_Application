@@ -30,12 +30,12 @@ public class CustomerService {
         return customerMapping.createToResponse(customer);
     }
 
-    public List<CustomerResponse> getAllCustomers(){
+    public List<CustomerResponse> getAllCustomers() {
         return customerRepository.findAll().stream()
-        .map(customerMapping::readToResponse).toList();
+                .map(customerMapping::readToResponse).toList();
     }
 
-    public Optional<CustomerResponse> getCustomerById (Long customerId){
+    public Optional<CustomerResponse> getCustomerById(Long customerId) {
         return Optional.ofNullable(customerRepository.findById(customerId).map(customerMapping::toLong).orElseThrow(
                 () -> new CustomerNotFoundException("Customer not found!")));
     }
@@ -48,4 +48,9 @@ public class CustomerService {
         return Optional.ofNullable(customerResponse);
     }
 
+    public void deleteCustomerById(Long customerId) {
+        customerRepository.deleteById(customerId);
+    }
+
+    public CustomerResponse updateCustomerById(Long customerId)
 }
