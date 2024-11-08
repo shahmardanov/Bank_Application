@@ -42,4 +42,9 @@ public class CustomerController {
     public void deleteCustomerById(@PathVariable(name = "customerId") Long id) {
         customerService.deleteCustomerById(id);
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<CustomerResponse> updateCustomer(@RequestBody CustomerRequest customerRequest){
+        return ResponseEntity.ok(customerService.updateCustomer(customerRequest));
+    }
 }

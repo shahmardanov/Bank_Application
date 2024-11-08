@@ -52,5 +52,12 @@ public class CustomerService {
         customerRepository.deleteById(customerId);
     }
 
-    public CustomerResponse updateCustomerById(Long customerId)
+    public CustomerResponse updateCustomer(CustomerRequest customerRequest) {
+        Customer customer = customerRepository.findById(customerRequest.getId())
+                .orElseThrow(() -> new CustomerNotFoundException("Customer not found!"));
+        Customer save = customerMapping.updateCustomerToUpdateResponse(customerRequest,customer);
+        customerRepository.save(save);
+        return customerMapping.updateToResponse(save);
+    }
 }
+

@@ -11,9 +11,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class CustomerRequest {
+    private Long id;
     private String customerName;
     private String customerEmail;
-    private Long dateOfBirth;
     private City city;
     private String address;
 }
