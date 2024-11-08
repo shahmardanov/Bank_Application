@@ -8,6 +8,9 @@ import com.example.bankapplication.repository.CustomerRepository;
 import com.example.bankapplication.request.CustomerRequest;
 import com.example.bankapplication.response.CustomerResponse;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,5 +27,10 @@ public class CustomerService {
         Customer customer = customerMapping.requestToEntity(customerRequest);
         customerRepository.save(customer);
         return customerMapping.createToResponse(customer);
+    }
+
+    public List<CustomerResponse> getAllCustomers(){
+        return customerRepository.findAll().stream()
+        .map(customerMapping::readToResponse).toList();
     }
 }
