@@ -1,7 +1,6 @@
 package com.example.bankapplication.service;
 
 import com.example.bankapplication.exception.CustomerAlreadyExist;
-import com.example.bankapplication.exception.CustomerNotFoundException;
 import com.example.bankapplication.mapping.CustomerMapping;
 import com.example.bankapplication.model.Customer;
 import com.example.bankapplication.repository.CustomerRepository;
@@ -10,6 +9,7 @@ import com.example.bankapplication.response.CustomerResponse;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -32,5 +32,9 @@ public class CustomerService {
     public List<CustomerResponse> getAllCustomers(){
         return customerRepository.findAll().stream()
         .map(customerMapping::readToResponse).toList();
+    }
+
+    public Optional<CustomerResponse> getCustomerById (Long customerId){
+        return customerRepository.findById(customerId).map(customerMapping::toLong);
     }
 }

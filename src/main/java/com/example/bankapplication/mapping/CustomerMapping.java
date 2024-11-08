@@ -19,6 +19,8 @@ public interface CustomerMapping {
 
     CustomerResponse updateToResponse(Customer customer);
 
+    CustomerResponse toLong (Customer customerId);
+
     Customer updateCustomerToUpdateResponse(CustomerRequest customerRequest, @MappingTarget Customer customer);
 
     
